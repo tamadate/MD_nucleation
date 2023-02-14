@@ -1,0 +1,58 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "C++ debug",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/test/a.out",
+        "args": ["${workspaceFolder}/test/brad.con", "1"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}/test/",
+        "environment": [],
+        "externalConsole": false, //set to true to see output in cmd instead
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+
+        "preLaunchTask": "C++ debug"
+      },
+
+      {
+        "name": "C++ main run",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/test/a.out",
+        "args": ["${workspaceFolder}/test/brad.con", "1"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}/test/",
+        "environment": [],
+        "externalConsole": true, //set to true to see output in cmd instead
+
+        "preLaunchTask": "C++ o3"
+      },
+
+      {
+        "name": "MPIc++ main run",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/test/a.out",
+        "args": ["-np","1","${workspaceFolder}/test/a.out","${workspaceFolder}/test/brad.con", "1", "2"],
+        "stopAtEntry": true,
+        "cwd": "${workspaceFolder}/test/",
+        "environment":[{ "name": "TMPDIR", "value": "/tmp" }],
+        "externalConsole": false,
+        "MIMode": "lldb",
+
+        "preLaunchTask": "mpicxx o3"
+      },
+
+      ]
+  }
+  
