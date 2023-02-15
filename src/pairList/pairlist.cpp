@@ -27,12 +27,6 @@ MD::make_pair(void){
 		mol[i][1] += molv[i][1]*dt*loopPair;
 		mol[i][2] += molv[i][2]*dt*loopPair;
 	}
-	/*boundary_scaling_gas_move();
-	boundary_scaling_vapor_move();
-	boundary_scaling_ion_move();
-	pre_ion[0]=mol[0][0];
-	pre_ion[1]=mol[0][1];
-	pre_ion[2]=mol[0][2];*/
 
 	updateInCenters();
 	update_gas_in();

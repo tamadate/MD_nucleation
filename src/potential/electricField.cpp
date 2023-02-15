@@ -61,5 +61,4 @@ PotentialEfield::compute(Variables *vars, FLAG *flags) {
 		fi[i][1]+=coeff*Ecoeff[1];
 		fi[i][2]+=coeff*Ecoeff[2];
 	}
-
 }

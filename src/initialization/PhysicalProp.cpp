@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------
 #include "../PhysicalProp.hpp"
-//------------------------------------------------------------------------
 
 void
 Physical::setPhysicalProp(int gastype, double T, double p){
@@ -43,36 +41,31 @@ Physical::setPhysicalProp(int gastype, double T, double p){
 
 void
 Physical::readIonProp(char* infile){
+	std::vector<double> atype;
 	ifstream stream(infile);
 	string str;
 	int iflag=0;
 	Mion=0;
+	z=0;
 	while(getline(stream,str)) {
-		if(str.length()==0) continue;
-		if (str=="atom type name mass coeff1 coeff2") {iflag=1; continue;}
+		if(str.length()==0) {iflag=0; continue;}
+		if (str=="atom type") {iflag=1; continue;}
 		if (str=="atoms") {iflag=2; continue;}
 		if (str=="bonds") {break;}
-	    string tmp;
-    	istringstream stream(str);
+		std::vector<string> readings;
+		istringstream stream(str);
+		string reading;
+		while(getline(stream,reading,'\t')) {
+			readings.push_back(reading);
+		}
 		if (iflag==1) {
-			int loop=0;
-			double mass;
-			while(getline(stream,tmp,'\t')) {
-				if (loop==2) mass=stod(tmp);
-				loop++;
-			}
+			double mass=stod(readings[2]);
 			atype.push_back(mass);
 		}
 		if (iflag==2) {
-			int loop=0;
-			int type, id;
-			double charge, mass;
-			while(getline(stream,tmp,'\t')) {
-				if (loop==1) type=stoi(tmp);
-				if (loop==2) charge=stod(tmp);
-				loop++;
-			}
-			mass=atype[type-1];
+			int type=stoi(readings[1])-1;
+			double charge=stod(readings[2]);
+			double mass=atype[type];
 			Mion+=mass;
 			z+=charge;
 		}
@@ -81,34 +74,30 @@ Physical::readIonProp(char* infile){
 
 void
 Physical::readVaporProp(char* infile){
+	std::vector<double> atype;
 	ifstream stream(infile);
 	string str;
 	int iflag=0;
 	Mvapor=0;
 	while(getline(stream,str)) {
-		if(str.length()==0) continue;
-		if (str=="atom type name mass coeff1 coeff2") {iflag=1; continue;}
+		if(str.length()==0) {iflag=0; continue;}
+		if (str=="atom type") {iflag=1; continue;}
 		if (str=="atoms") {iflag=2; continue;}
 		if (str=="bonds") {break;}
-	    string tmp;
-    	istringstream stream(str);
+		std::vector<string> readings;
+		istringstream stream(str);
+		string reading;
+		while(getline(stream,reading,'\t')) {
+			readings.push_back(reading);
+		}
 		if (iflag==1) {
-			int loop=0;
-			double mass;
-			while(getline(stream,tmp,'\t')) {
-				if (loop==2) mass=stod(tmp);
-				loop++;
-			}
-			atype_v.push_back(mass);
+			double mass=stod(readings[2]);
+			atype.push_back(mass);
 		}
 		if (iflag==2) {
-			int loop=0;
-			int type, id;
-			while(getline(stream,tmp,'\t')) {
-				if (loop==1) type=stoi(tmp)-1;
-				loop++;
-			}
-			double mass=atype_v[type];
+			int type=stoi(readings[1])-1;
+			double charge=stod(readings[2]);
+			double mass=atype[type];
 			Mvapor+=mass;
 		}
 	}

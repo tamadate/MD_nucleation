@@ -1,12 +1,6 @@
 #include "potential.hpp"
 
 
-
-/////////////////////////////////////////////////////////////////////
-/*
-	- Calculate force working on vapor-gas (LJ)
-*/
-/////////////////////////////////////////////////////////////////////
 void
 PotentialVaporGas::compute(Variables *vars, FLAG *flags) {
 	vars->times.tvg-=omp_get_wtime();

@@ -56,7 +56,6 @@ public:
 	std::vector<std::array<double,3>> bondsGasRigid;		// SHAKE
 
 	std::array<std::vector<int>,3> group;
-	void setCrossPotentials(void);
 
 	double time;
 	double zeta_ion;
@@ -83,18 +82,12 @@ public:
 	std::vector<Dihedral_type> dtypes;
 
 	std::vector<vector<vector<double>>> pair_coeff;
-	double bornCoeff[2][2][5];
-
-	void setGasPotentials(void);
-	void setBMHPotential(void);
-	void setCrossPotentials(int Nion,int Nvapor);
+	void setCrossPotentials(void);
 
 	/*initialization and export to dump file*/
-	void read_initial(char* ionFile, char* vaporFile);
 	void readIonFile(char* infile);
 	void readVaporFile(char* infile);
-	void ionInitialVelocity(double T);
-	void ionRotation(void);
+	void ionInitial(double T);
 	double totalPotential;
 	double totalVirial;
 

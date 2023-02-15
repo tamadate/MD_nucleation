@@ -14,9 +14,9 @@
 */
 /////////////////////////////////////////////////////////////////////
 void
-MD::run_diff(char** argv) {
+MD::run(char** argv) {
 /****Thermal relaxation****/
-  const int logger=10000;
+	const int logger=10000;
 	for (auto &a : IntraInter) {a->printName();}
 	for (auto &a : InterInter) {a->printName();}
 	for (itime=0; itime < step_relax; itime++) {
@@ -39,7 +39,6 @@ MD::run_diff(char** argv) {
 	*/
 	vars->time=0;
 	itime=0;
-	setPotential(flags,1);
 	for (auto &a : vars->position){
 		a[0]-=vars->position[0][0];
 		a[1]-=vars->position[0][1];

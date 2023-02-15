@@ -30,6 +30,7 @@ MD::update_vapor_in(void){
             //if flag_in ON, molecule push back to vars->gas_in
             //if flag_in OFF, molecule push back to vars->gas_out
             vars->vapor_in.push_back(i);
+            if(vars->region[i]) Ovin(i);
             makePolyatomicProp_in(i);
             vars->region[i]=true;
         }

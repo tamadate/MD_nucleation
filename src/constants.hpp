@@ -32,7 +32,6 @@ const double e0 = 8.85e-12;     /* permittivity of vacuum */
 const double e = 1.602e-19;     /* elementary charge */
 
 const double MN2=28.0, MHe=4.0026, MAr=39.948;
-const double MMeOH=32.0, MH2O=18.0, MEtOH=46.0;
 const double mN2=MN2/Nw/1000.0;
 const double myuHe=1.47e-5;
 const double alphaHe=0.208, alphaN2=1.7*0.5, alphaAr=1.664;
@@ -42,7 +41,7 @@ const double SN2=107, TrefN2=273.0, myuN2=1.663e-5; // REF
 //------------------------------------------------------------------------
 
 /*******************Coeff.************************/
-const double Rinter=200;	// Radius of interaction area
+const double Rinter=100;	// Radius of interaction area
 const double Overlap=10;
 const double Rcenter=Rinter-Overlap*0.5;
 const double Ri2=Rinter*Rinter;

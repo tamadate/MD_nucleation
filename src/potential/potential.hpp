@@ -3,6 +3,7 @@
 #include "basePotential.hpp"
 #include "StillingerWeber/potentialSW.hpp"
 #include "Tersoff/potentialTersoff.hpp"
+#include "BMHFT/potentialBMHFT.hpp"
 
 
 class PotentialGasIon : public Potential {
@@ -93,16 +94,6 @@ class PotentialGasIntra : public Potential {
 		void compute(Variables *vars, FLAG *flags);
 		PotentialGasIntra(){};
 		~PotentialGasIntra(){};
-};
-
-class PotentialBorn : public Potential {
-	private:
-		string potName="Ion BMH";
-	public:
-		void printName(void) {cout<<potName<<endl;}
-		void compute(Variables *vars, FLAG *flags);
-		PotentialBorn(){};
-		~PotentialBorn(){};
 };
 
 class PotentialEfield : public Potential {

@@ -1,4 +1,4 @@
-#include "potential.hpp"
+#include "potentialBMHFT.hpp"
 /*########################################################################################
 
 -----compute intramolecular interaction-----
@@ -30,10 +30,10 @@ PotentialBorn::compute(Variables *vars, FLAG *flags) {
 			//vars->bornCoeff[type1][type2][3]=sigma
 			//vars->bornCoeff[type1][type2][4]=1/rho
 
-			double rexp=exp(vars->bornCoeff[type1][type2][4]*(vars->bornCoeff[type1][type2][3]-r));
-			double force1 = vars->bornCoeff[type1][type2][4]*vars->bornCoeff[type1][type2][0]*r*rexp;
-			double force2 = -vars->bornCoeff[type1][type2][1]*r6inv;
-			double force3 = -vars->bornCoeff[type1][type2][2]*r6inv*r2inv;
+			double rexp=exp(bornCoeff[type1][type2][4]*(bornCoeff[type1][type2][3]-r));
+			double force1 = bornCoeff[type1][type2][4]*bornCoeff[type1][type2][0]*r*rexp;
+			double force2 = -bornCoeff[type1][type2][1]*r6inv;
+			double force3 = -bornCoeff[type1][type2][2]*r6inv*r2inv;
 			double force_coul = qqrd2e*vars->chargeAtom[0][i]*vars->chargeAtom[0][j]*sqrt(r2inv);
 			double force_pair = (force1+force2+force3+force_coul)*r2inv;
 
@@ -45,9 +45,9 @@ PotentialBorn::compute(Variables *vars, FLAG *flags) {
 			f[j][2] -= force_pair * dz;
 			if(flags->eflag) {
 				vars->Utotal.Uion+=force_coul;
-				vars->Utotal.Uion+=rexp*vars->bornCoeff[type1][type2][0];
-				vars->Utotal.Uion-=vars->bornCoeff[type1][type2][1]/6.0*r6inv;
-				vars->Utotal.Uion-=vars->bornCoeff[type1][type2][2]/8.0*r6inv*r2inv;
+				vars->Utotal.Uion+=rexp*bornCoeff[type1][type2][0];
+				vars->Utotal.Uion-=bornCoeff[type1][type2][1]/6.0*r6inv;
+				vars->Utotal.Uion-=bornCoeff[type1][type2][2]/8.0*r6inv*r2inv;
 			}
 			//vars->totalVirial+=force_lj;
 		}

@@ -11,12 +11,6 @@ MD::output_initial(void){
 	sprintf(filepath, "ion_%d_%d.dat", int(T), int(calculation_number));
 	FILE*f=fopen(filepath, "w");
 	fclose(f);
-	/*sprintf(filepath, "%d_%d_relax.dat", int(T), int(calculation_number));
-	f=fopen(filepath, "w");
-	fclose(f);
-	sprintf(filepath, "gas_%d_%d.dat", int(T), int(calculation_number));
-	f=fopen(filepath, "w");
-	fclose(f);*/
 	sprintf(filepath, "vapor_collision_%d.dat", int(calculation_number));
 	f=fopen(filepath, "w");
 	fclose(f);
@@ -26,9 +20,6 @@ MD::output_initial(void){
 	sprintf(filepath, "vapor_out_%d.dat", int(calculation_number));
 	f=fopen(filepath, "w");
 	fclose(f);
-	/*sprintf(filepath, "gas_collision_%d.dat", int(calculation_number));
-	f=fopen(filepath, "w");
-	fclose(f);*/
 	sprintf(filepath, "K_%d.dat", int(calculation_number));
 	f=fopen(filepath, "w");
 	fclose(f);
@@ -48,33 +39,6 @@ MD::output(void){
 	fclose(f);
 }
 
-void
-MD::output_gas(void){
-	sprintf(filepath, "gas_%d_%d.dat", int(T), int(calculation_number));
-	std::array<double,3> *x = vars->position.data();
-	std::array<double,3> *v = vars->velocity.data();
-	double X[3], V[3], Mass;
-	X[0]=X[1]=X[2]=V[0]=V[1]=V[2]=Mass=0;
-	for (auto &i : vars->group[1]){
-		X[0]+=x[i][0]*vars->mass[i];
-		X[1]+=x[i][1]*vars->mass[i];
-		X[2]+=x[i][2]*vars->mass[i];
-		V[0]+=v[i][0]*vars->mass[i];
-		V[1]+=v[i][1]*vars->mass[i];
-		V[2]+=v[i][2]*vars->mass[i];
-		Mass+=vars->mass[i];
-	}
-	X[0]/=Mass;
-	X[1]/=Mass;
-	X[2]/=Mass;
-	V[0]/=Mass;
-	V[1]/=Mass;
-	V[2]/=Mass;
-
-	FILE*f=fopen(filepath, "a");
-	fprintf(f, "%e %e %e %e %e %e %e\n", vars->time/1e6, X[0], X[1], X[2], V[0], V[1], V[2]);
-	fclose(f);
-}
 
 void
 MD::Ovin(int i){
@@ -99,15 +63,6 @@ MD::Ovout(int i){
 	fprintf(f, "%d %e %e %e %e %e %e %e\n", i,itime*dt,xi[0]-x[0],xi[1]-x[1],xi[2]-x[2],vi[0]-v[0],vi[1]-v[1],vi[2]-v[2]);
 	fclose(f);
 }
-
-void
-MD::output_temp(double gastemp, double iontemp){
-	sprintf(filepath, "%d_%d_relax.dat", int(T), int(calculation_number));
-	FILE*f=fopen(filepath, "a");
-	fprintf(f, "%f\t%f\t%f\n", vars->time/1e6, gastemp, iontemp);
-	fclose(f);
-}
-
 
 void
 MD::display(int output_ONOFF){

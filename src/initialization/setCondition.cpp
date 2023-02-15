@@ -16,7 +16,7 @@ MD::readCondFile(char* condfile){
 		std::vector<string> readings;
 		istringstream stream(str);
 		string reading;
-		while(getline(stream,reading,'\t')) {
+		while(getline(stream,reading,' ')) {
 			readings.push_back(reading);
 		}
 		if(readings[0]=="Input"){
@@ -244,7 +244,7 @@ MD::readCondFile(char* condfile){
 		}
 	}
 	vars->flags=flags;
-	d_size=pow(Nof_around_gas*kb*T/p,1/3.0)*1e10;//pow(28.0855*8/6.02e23/(2.218e-24),1/3.0)*5;
+	d_size=pow(Nof_around_gas*kb*T/p,1/3.0)*1e10;
 	V=d_size*d_size*d_size;
 	CL2 = (CUTOFF)*(CUTOFF);
 	ML2 = (CUTOFF+MARGIN)*(CUTOFF+MARGIN);

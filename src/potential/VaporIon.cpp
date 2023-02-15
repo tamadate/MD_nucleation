@@ -1,12 +1,6 @@
 #include "potential.hpp"
 
 
-
-/////////////////////////////////////////////////////////////////////
-/*
-	- Calculate force working on ion-gas (LJ)
-*/
-/////////////////////////////////////////////////////////////////////
 void
 PotentialVaporIon::compute(Variables *vars, FLAG *flags) {
 	vars->times.tvi-=omp_get_wtime();

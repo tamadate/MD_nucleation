@@ -22,6 +22,5 @@ public:
 	~Physical(void){};
 
 private:
-	std::vector<double> atype;
-	std::vector<double> atype_v;
+	
 };

@@ -46,7 +46,7 @@
         "args": ["-np","1","${workspaceFolder}/test/a.out","${workspaceFolder}/test/brad.con", "1", "2"],
         "stopAtEntry": true,
         "cwd": "${workspaceFolder}/test/",
-        "environment":[{ "name": "TMPDIR", "value": "/tmp" }],
+        "environment":[{ "name": "readings[1]DIR", "value": "/readings[1]" }],
         "externalConsole": false,
         "MIMode": "lldb",
 
