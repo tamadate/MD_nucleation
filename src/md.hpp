@@ -3,6 +3,7 @@
 #include "output/observer.hpp"
 #include "potential/potential.hpp"
 #include "PhysicalProp.hpp"
+#include "MB.hpp"
 //------------------------------------------------------------------------
 
 class MD {
@@ -41,6 +42,8 @@ class MD {
 	Observer *obs;
 	Physical *pp;
 	FLAG *flags;
+	MBdist *mbdist;
+	MBdist *mbdistV;
 
 //	Interactions
 	std::vector<Potential*> InterInter;
@@ -64,6 +67,10 @@ class MD {
   	void makeDiatomicProp_in(int i);
 	void makePolyatomicProp_in(int i);
 	void periodic(void);	/*	periodic condition	*/
+	void boundary_scaling_vapor_move(void);
+	void boundary_scaling_gas_move(void);
+	void boundary_scaling_ion_move(void);
+	double preCenter[3];
 	int loopPair, loop_update;	/*	current fixing time(loop) and update fixing time(loop) of out_gas for multi-timestep	*/
 
 //	initialization

@@ -12,6 +12,8 @@ MD::MD(char* condfile, int calcNumber) {
 	obs = new Observer();
 	pp = new Physical();
 	flags = new FLAG();
+	mbdist = new MBdist();
+	mbdistV = new MBdist();
 
 	setDefaultVariables();
 	readCondFile(condfile);
@@ -32,6 +34,9 @@ MD::MD(char* condfile, int calcNumber) {
 	make_pair();
 	margin_length = MARGIN;
 	vars->tzero();
+
+	mbdist -> makeWeightedMB(pp->cgas,pp->mgas,T);
+	mbdistV -> makeWeightedMB(pp->cvapor,pp->mvapor,T);
 }
 
 /////////////////////////////////////////////////////////////////////
